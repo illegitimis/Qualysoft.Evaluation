@@ -1,0 +1,17 @@
+.vs/
+Qualysoft.Evaluation.Api/bin/Debug/
+Qualysoft.Evaluation.Api/obj/Debug/
+Qualysoft.Evaluation.Data/bin/Debug/
+Qualysoft.Evaluation.Data/obj/Debug/
+Qualysoft.Evaluation.Api/obj/Qualysoft.Evaluation.Api.csproj.nuget.g.targets
+Qualysoft.Evaluation.Api/obj/Qualysoft.Evaluation.Api.csproj.nuget.g.props
+Qualysoft.Evaluation.Api/obj/Qualysoft.Evaluation.Api.csproj.nuget.cache
+Qualysoft.Evaluation.Data/obj/Qualysoft.Evaluation.Data.csproj.nuget.g.targets
+Qualysoft.Evaluation.Data/obj/Qualysoft.Evaluation.Data.csproj.nuget.g.props
+Qualysoft.Evaluation.Data/obj/Qualysoft.Evaluation.Data.csproj.nuget.cache
+Qualysoft.Evaluation.Domain/bin/Debug/
+Qualysoft.Evaluation.Domain/obj/Qualysoft.Evaluation.Domain.csproj.nuget.g.targets
+Qualysoft.Evaluation.Domain/obj/Qualysoft.Evaluation.Domain.csproj.nuget.g.props
+Qualysoft.Evaluation.Domain/obj/Qualysoft.Evaluation.Domain.csproj.nuget.cache
+Qualysoft.Evaluation.Domain/obj/Debug/netcoreapp2.1/Qualysoft.Evaluation.Domain.AssemblyInfo.cs
+Qualysoft.Evaluation.Domain/obj/Debug/

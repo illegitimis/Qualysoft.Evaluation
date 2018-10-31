@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Qualysoft.Evaluation.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Qualysoft.Evaluation.Api.Controllers.DataController">
+            <summary>
+            Data controller
+            </summary>
+        </member>
+        <member name="M:Qualysoft.Evaluation.Api.Controllers.DataController.Post(Qualysoft.Evaluation.Api.Models.RequestModel)">
+            <summary>POST /api/data</summary>
+            <param name="value">request model</param>
+            <remarks>
+            This endpoint receives a collection of serialized JSON models and stores them in a database created using automated database migrations.
+            </remarks>
+        </member>
+        <member name="M:Qualysoft.Evaluation.Api.Controllers.ValuesController.Get">
+            <summary>GET api/values</summary>
+            <returns>string array</returns>
+            <remarks>regular remarks</remarks>
+        </member>
+        <member name="M:Qualysoft.Evaluation.Api.Controllers.ValuesController.Get(System.Int32)">
+            <summary>GET api/values/{id}</summary>
+            <param name="id">id</param>
+            <returns>string</returns>
+            <remarks>
+            <code>
+            public class DeliveryOptionsSearchModelExample : IExamplesProvider
+            {
+            public object GetExamples()
+            {
+            return new DeliveryOptionsSearchModel
+            {
+            Lang = "en-GB", Currency = "GBP", 
+            Address = new AddressModel { Address1 = "1 Gwalior Road", Locality = "London" }, 
+            Items = new[] { new ItemModel {} } }; 
+            }
+            </code>
+            </remarks>
+        </member>
+        <member name="T:Qualysoft.Evaluation.Api.Models.RequestModel">
+            <summary>post data request dto</summary>
+        </member>
+        <member name="P:Qualysoft.Evaluation.Api.Models.RequestModel.Index">
+            <summary>index</summary>
+        </member>
+        <member name="P:Qualysoft.Evaluation.Api.Models.RequestModel.Name">
+            <summary>name</summary>
+        </member>
+        <member name="P:Qualysoft.Evaluation.Api.Models.RequestModel.Visits">
+            <summary>#no visits</summary>
+        </member>
+        <member name="P:Qualysoft.Evaluation.Api.Models.RequestModel.Date">
+            <summary>date time</summary>
+        </member>
+        <member name="M:Qualysoft.Evaluation.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">Service descriptors collection</param>
+        </member>
+        <member name="M:Qualysoft.Evaluation.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">configures request pipeline</param>
+            <param name="env">web hosting environment</param>
+        </member>
+    </members>
+</doc>
