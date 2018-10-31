@@ -10,6 +10,7 @@
     using Microsoft.Extensions.Logging;
     using Qualysoft.Evaluation.Api.Filters;
     using Qualysoft.Evaluation.Data;
+    using Qualysoft.Evaluation.Domain;
     using Swashbuckle.AspNetCore.Filters;
     using Swashbuckle.AspNetCore.Swagger;
     using System;
@@ -38,26 +39,18 @@
         /// <param name="services">Service descriptors collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            if (Environment.IsDevelopment())
-            {
-                // Development service configuration
-                var logger = LoggerFactory.CreateLogger<Startup>();
-                logger.LogInformation("Development environment");
-            }
+            services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
-            services.AddDbContext<EvaluationContext>(opt => opt.UseInMemoryDatabase("TodoList"));
-            
             services.AddMvcCore();
 
-            services
-                .AddMvc(options => 
-                {
-                    options.RespectBrowserAcceptHeader = true;
-                    options.Filters.Add(typeof(GlobalExceptionFilterWithLoggingAttribute));
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options => 
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.Filters.Add(typeof(GlobalExceptionFilterWithLoggingAttribute));
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddMemoryCache();
+            // services.AddMemoryCache();
 
             services.AddSwaggerExamples();
 
@@ -87,11 +80,62 @@
                 // c.OperationFilter<ExamplesOperationFilter>();
             });
 
-
+            // TODO: Autofac
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
-        // 
+        /*
+        /// <summary>
+        /// Configure Staging Services
+        /// </summary>
+        /// <param name="services"></param>
+        public void ConfigureStagingServices(IServiceCollection services)
+        {
+            if (!Environment.IsStaging())
+            {
+                throw new BasketNotFoundException(13);
+            }
+
+            services.AddDbContext<EvaluationContext>(options => options.UseSqlite("hoist.db"));
+
+            ConfigureServices(services);
+        }
+
+        /// <summary>
+        /// Development service configuration
+        /// </summary>
+        /// <param name="services"></param>
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            if (!Environment.IsDevelopment())
+            {
+                throw new BasketNotFoundException(17);
+            }
+            
+            var logger = LoggerFactory.CreateLogger<Startup>();
+            logger.LogInformation("Development environment");
+            services.AddDbContext<EvaluationContext>(opt => opt.UseInMemoryDatabase("Hoist"));
+
+            ConfigureServices(services);
+        }
+
+        /// <summary>
+        /// Development service configuration
+        /// </summary>
+        /// <param name="services"></param>
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            if (!Environment.IsProduction())
+            {
+                throw new BasketNotFoundException(11);
+            }
+
+            services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+
+            ConfigureServices(services);
+        }
+        */
+
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
