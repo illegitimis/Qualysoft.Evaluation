@@ -5,9 +5,19 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Api", "Qualysoft.Evaluation.Api\Qualysoft.Evaluation.Api.csproj", "{8CB503B6-3263-4854-8A39-7A2051F6CC75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Domain", "Qualysoft.Evaluation.Domain\Qualysoft.Evaluation.Domain.csproj", "{6AD030E5-839F-4EA3-9EA7-F7FA2A3084BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Domain", "Qualysoft.Evaluation.Domain\Qualysoft.Evaluation.Domain.csproj", "{6AD030E5-839F-4EA3-9EA7-F7FA2A3084BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Data", "Qualysoft.Evaluation.Data\Qualysoft.Evaluation.Data.csproj", "{6DDC0568-7A86-47A7-B080-69290E57A0F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Data", "Qualysoft.Evaluation.Data\Qualysoft.Evaluation.Data.csproj", "{6DDC0568-7A86-47A7-B080-69290E57A0F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Data.UnitTests", "Qualysoft.Evaluation.Data.UnitTests\Qualysoft.Evaluation.Data.UnitTests.csproj", "{C734EC26-A28E-4BF5-874A-778EB819470E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Domain.UnitTests", "Qualysoft.Evaluation.Domain.UnitTests\Qualysoft.Evaluation.Domain.UnitTests.csproj", "{6D274D3B-46DC-4974-AD46-3F80D441CDF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Application", "Qualysoft.Evaluation.Application\Qualysoft.Evaluation.Application.csproj", "{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Api.UnitTests", "Qualysoft.Evaluation.Api.UnitTests\Qualysoft.Evaluation.Api.UnitTests.csproj", "{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qualysoft.Evaluation.Application.UnitTests", "Qualysoft.Evaluation.Application.UnitTests\Qualysoft.Evaluation.Application.UnitTests.csproj", "{796DF2A1-5AB3-4C28-981F-51A24964B728}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +37,26 @@ Global
 		{6DDC0568-7A86-47A7-B080-69290E57A0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DDC0568-7A86-47A7-B080-69290E57A0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DDC0568-7A86-47A7-B080-69290E57A0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C734EC26-A28E-4BF5-874A-778EB819470E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C734EC26-A28E-4BF5-874A-778EB819470E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C734EC26-A28E-4BF5-874A-778EB819470E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C734EC26-A28E-4BF5-874A-778EB819470E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D274D3B-46DC-4974-AD46-3F80D441CDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D274D3B-46DC-4974-AD46-3F80D441CDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D274D3B-46DC-4974-AD46-3F80D441CDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D274D3B-46DC-4974-AD46-3F80D441CDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796DF2A1-5AB3-4C28-981F-51A24964B728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796DF2A1-5AB3-4C28-981F-51A24964B728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796DF2A1-5AB3-4C28-981F-51A24964B728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796DF2A1-5AB3-4C28-981F-51A24964B728}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

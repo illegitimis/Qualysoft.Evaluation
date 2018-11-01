@@ -4,22 +4,23 @@
     using Qualysoft.Evaluation.Domain;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
+    /// <summary>Extensions methods for <see cref="ModelBuilder"/></summary>
+    /// <remarks>https://www.learnentityframeworkcore.com/migrations/seeding</remarks>
     public static class ModelBuilderExtensions
     {
         /// <summary>
-        /// https://www.learnentityframeworkcore.com/migrations/seeding
+        /// Generate fake data with Bogus
         /// </summary>
-        /// <param name="modelBuilder"></param>
-        public static void Seed(this ModelBuilder modelBuilder)
+        /// <param name="modelBuilder"></param>        
+
+        public static void BogusFakerSeed(this ModelBuilder modelBuilder, int count)
         {
             modelBuilder
-                .Entity<Request>()
-                .HasData(
-                    new Request(1, "William Shakespeare", DateTime.UtcNow, 13),
-                    new Request(2, "io", DateTime.Now)
-                );
+               .Entity<Request>()
+               .HasData(BogusDataGenerator.Requests(count).ToArray());
         }
 
     }

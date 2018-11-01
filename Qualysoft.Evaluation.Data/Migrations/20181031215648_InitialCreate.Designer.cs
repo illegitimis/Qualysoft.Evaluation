@@ -9,8 +9,8 @@ using Qualysoft.Evaluation.Data;
 namespace Qualysoft.Evaluation.Data.Migrations
 {
     [DbContext(typeof(EvaluationContext))]
-    [Migration("20181031215648_InitialCreateSqlite")]
-    partial class InitialCreateSqlite
+    [Migration("20181031215648_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

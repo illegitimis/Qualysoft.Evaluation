@@ -2,13 +2,11 @@
 {
     using System;
 
-    /// <summary>
-    ///  
-    /// </summary>
+    /// <summary>request entity</summary>
     /// <remarks>Not defined by attributes, but by identity, <see cref="Index"/> column</remarks>
     public class Request : BaseEntity<int>, IAggregateRoot
     {
-        protected Request() { }
+        public Request() { }
 
         public Request(int id, string name, DateTime date, int? visits = null)
             : base(id)
@@ -21,5 +19,12 @@
         public string Name { get; set; }
         public int? Visits { get; set; }
         public DateTime Date { get; set; }
+
+        public void UpdateAttributes(string name, DateTime date, int? visits)
+        {
+            Name = name;
+            Date = date;
+            Visits = visits;
+        }
     }
 }

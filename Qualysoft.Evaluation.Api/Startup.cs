@@ -9,6 +9,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Qualysoft.Evaluation.Api.Filters;
+    using Qualysoft.Evaluation.Application;
     using Qualysoft.Evaluation.Data;
     using Qualysoft.Evaluation.Domain;
     using Swashbuckle.AspNetCore.Filters;
@@ -21,6 +22,8 @@
     {
         const string NAME = "Qualysoft.Evaluation.Api";
         const string V1 = "v1";
+        const string SWAGGER_ENDPOINT_URL_KEY = "SwaggerEndpointUrl";
+        const string DESCRIPTION = "A simple ASP.NET Core Web API";
 
         public Startup(IHostingEnvironment env, IConfiguration config, ILoggerFactory loggerFactory)
         {
@@ -50,10 +53,6 @@
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // services.AddMemoryCache();
-
-            services.AddSwaggerExamples();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(V1, new Info
@@ -61,7 +60,7 @@
                     Title = $"{NAME} {V1}",
                     Version = V1,
                     Contact = new Contact { Email = "andrei.ciprian@gmail.com", Name = "Andrei Ciprian Popescu", Url = "http://andreipopescu.tk/" },
-                    Description = "A simple ASP.NET Core Web API",
+                    Description = DESCRIPTION,
                     TermsOfService = "<TermsOfService>",
                     License = new License { Name = "BSD 3-Clause", Url = "https://github.com/domaindrivendev/Swashbuckle/blob/master/LICENSE" }
                 });
@@ -77,11 +76,14 @@
                 c.DescribeStringEnumsInCamelCase();
                 c.IgnoreObsoleteActions();
                 c.IgnoreObsoleteProperties();
-                // c.OperationFilter<ExamplesOperationFilter>();
             });
+
+            services.AddSwaggerExamples();
 
             // TODO: Autofac
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAsyncRepository<Request, int>, EFRepository<EvaluationContext, Request, int>>();
+            services.AddScoped<IRequestService, RequestService>();
         }
 
         /*
@@ -168,8 +170,11 @@
 
             app.UseSwaggerUI(c => 
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", NAME);
+                c.SwaggerEndpoint(Configuration.GetValue<string>(SWAGGER_ENDPOINT_URL_KEY), NAME);
                 c.RoutePrefix = string.Empty;
+                c.DocExpansion(DocExpansion.List);
+                c.DisplayRequestDuration();
+                c.DocumentTitle = DESCRIPTION;
             });
 
             app.UseMvc();

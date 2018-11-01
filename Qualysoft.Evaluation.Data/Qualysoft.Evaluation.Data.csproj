@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="24.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
@@ -12,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Qualysoft.Evaluation.Application\Qualysoft.Evaluation.Application.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Domain\Qualysoft.Evaluation.Domain.csproj" />
   </ItemGroup>
 

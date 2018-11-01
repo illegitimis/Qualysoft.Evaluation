@@ -1,4 +1,4 @@
-﻿namespace Qualysoft.Evaluation.Api
+﻿namespace Qualysoft.Evaluation.Application
 {
     using System.Collections.Generic;
     using System.Linq;

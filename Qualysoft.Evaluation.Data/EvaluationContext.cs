@@ -3,9 +3,10 @@
     using Microsoft.EntityFrameworkCore;
     using Qualysoft.Evaluation.Domain;
     using System;
-using System.Collections.Generic;
-using System.Text;
 
+    /// <summary>
+    /// Custom <see cref="DbContext"/> implementation
+    /// </summary>
     public class EvaluationContext : DbContext
     {
         public EvaluationContext(DbContextOptions<EvaluationContext> options)
@@ -44,7 +45,7 @@ using System.Text;
                     .IsRequired(true);
 
             // seed with EFCore > 2.1
-            modelBuilder.Seed();
+            modelBuilder.BogusFakerSeed(100);
         }
     }
 }
