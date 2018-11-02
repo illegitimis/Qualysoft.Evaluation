@@ -26,5 +26,7 @@
             Date = date;
             Visits = visits;
         }
+
+        public string GetDateString() => Date.ToString("yyyy-MM-dd");
     }
 }

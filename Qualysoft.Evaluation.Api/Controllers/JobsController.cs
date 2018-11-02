@@ -1,24 +1,28 @@
 ﻿namespace Qualysoft.Evaluation.Api.Controllers
 {
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc;
+    using Qualysoft.Evaluation.Application;
     using Qualysoft.Evaluation.Domain;
     using Swashbuckle.AspNetCore.Annotations;
-using static Microsoft.AspNetCore.Http.StatusCodes;
+    using System.Threading.Tasks;
+    using static Microsoft.AspNetCore.Http.StatusCodes;
 
     [Route("api/[controller]")]
     [ApiController]
     public class JobsController : ControllerBase
     {
         private readonly IAsyncRepository<Request, int> requestRepository;
+        private readonly ISerializeXml xmlSerializer;
+        private readonly IBackgroundJobRunner backgroundJobRunner;
 
-        public JobsController(IAsyncRepository<Request, int> requestRepository)
+        public JobsController(
+            IAsyncRepository<Request, int> requestRepo,
+            ISerializeXml serializer,
+            IBackgroundJobRunner jobber)
         {
-            this.requestRepository = requestRepository;
+            requestRepository = requestRepo;
+            xmlSerializer = serializer;
+            backgroundJobRunner = jobber;
         }
 
         /// <summary>
@@ -32,6 +36,10 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
         {
             var requests = await requestRepository.GetAllAsync();
 
+            foreach (var request in requests)
+            {
+                backgroundJobRunner.Enqueue(() => xmlSerializer.Persist(request));
+            }
 
             return Ok();
         }

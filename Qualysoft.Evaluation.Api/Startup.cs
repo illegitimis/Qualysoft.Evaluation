@@ -1,4 +1,6 @@
-﻿namespace Qualysoft.Evaluation.Api
+﻿using Qualysoft.Evaluation.Application;
+
+namespace Qualysoft.Evaluation.Api
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -10,6 +12,7 @@
     using Microsoft.Extensions.Logging;
     using Qualysoft.Evaluation.Api.Filters;
     using Qualysoft.Evaluation.Application;
+    using Qualysoft.Evaluation.Application.Xml;
     using Qualysoft.Evaluation.Data;
     using Qualysoft.Evaluation.Domain;
     using Swashbuckle.AspNetCore.Filters;
@@ -18,12 +21,14 @@
     using System.IO;
     using System.Reflection;
 
+    /// <summary>bootstraps the app</summary>
     public class Startup
     {
         const string NAME = "Qualysoft.Evaluation.Api";
         const string V1 = "v1";
         const string SWAGGER_ENDPOINT_URL_KEY = "SwaggerEndpointUrl";
         const string DESCRIPTION = "A simple ASP.NET Core Web API";
+        const string ERROR_HANDLING_PATH = "/error";
 
         public Startup(IHostingEnvironment env, IConfiguration config, ILoggerFactory loggerFactory)
         {
@@ -36,17 +41,19 @@
         public IHostingEnvironment Environment { get; }
         public ILoggerFactory LoggerFactory { get; }
 
+        #region Configure<EnvironmentName>Services
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services">Service descriptors collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+            // services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
             services.AddMvcCore();
 
-            services.AddMvc(options => 
+            services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.Filters.Add(typeof(GlobalExceptionFilterWithLoggingAttribute));
@@ -84,9 +91,12 @@
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAsyncRepository<Request, int>, EFRepository<EvaluationContext, Request, int>>();
             services.AddScoped<IRequestService, RequestService>();
+            services.AddScoped<IBackgroundJobRunner, BackgroundJobRunner>();
+            services.AddScoped<ISerializeXml, AppDataFileRequestXmlSerializer>();
+            services.AddSingleton<IClassMapper<Request, CT_XSD_Request>, DomainToXmlSerializedRequestMapper>();
         }
 
-        /*
+
         /// <summary>
         /// Configure Staging Services
         /// </summary>
@@ -113,7 +123,7 @@
             {
                 throw new BasketNotFoundException(17);
             }
-            
+
             var logger = LoggerFactory.CreateLogger<Startup>();
             logger.LogInformation("Development environment");
             services.AddDbContext<EvaluationContext>(opt => opt.UseInMemoryDatabase("Hoist"));
@@ -136,8 +146,11 @@
 
             ConfigureServices(services);
         }
-        */
 
+
+        #endregion
+
+        #region Configure<EnvironmentName>
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -146,29 +159,13 @@
         /// <param name="env">web hosting environment</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                // app.UseBrowserLink();
-            }
-            else
-            {
-                // app.UseHsts();
-                app.UseExceptionHandler("/error");
-            }
-
-            // app.DisableOptionsVerb();
-
-            // app.UseHttpsRedirection();
-
-            // app.UseStatusCodePages();
-            app.UseStatusCodePagesWithRedirects("/error/{0}");
+            app.UseStatusCodePagesWithRedirects(@"{ERROR_HANDLING_PATH}/{0}");
 
             app.UseStaticFiles();
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => 
+            app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint(Configuration.GetValue<string>(SWAGGER_ENDPOINT_URL_KEY), NAME);
                 c.RoutePrefix = string.Empty;
@@ -179,5 +176,28 @@
 
             app.UseMvc();
         }
+
+        public void ConfigureDevelopment(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (!env.IsDevelopment()) return;
+            app.UseDeveloperExceptionPage();
+            Configure(app, env);
+        }
+
+        public void ConfigureStaging(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (!env.IsStaging()) return;
+            app.UseExceptionHandler(ERROR_HANDLING_PATH);
+            Configure(app, env);
+        }
+
+        public void ConfigureProduction(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (!env.IsProduction()) return;
+            app.UseExceptionHandler(ERROR_HANDLING_PATH);
+            Configure(app, env);
+        }
+               
+        #endregion
     }
 }
