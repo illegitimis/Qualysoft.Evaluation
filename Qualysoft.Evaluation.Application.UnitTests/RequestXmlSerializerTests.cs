@@ -8,8 +8,6 @@ namespace Qualysoft.Evaluation.Application.UnitTests
 
     public class RequestXmlSerializerTests
     {
-        const string v = "visits not specified";
-
         private readonly DomainToXmlSerializedRequestMapper mapper;
 
         #region Should split this into separate tests for each serializer type
@@ -18,22 +16,6 @@ namespace Qualysoft.Evaluation.Application.UnitTests
         private readonly BaseRequestXmlSerializer appDataFileRequestXmlSerializer;
 
         #endregion
-
-        private readonly Request r1 = new Request
-        {
-            Index = 13,
-            Name = v,
-            Date = new DateTime(2000, 1, 1)
-        };
-
-        private readonly Request r2 = new Request
-        {
-            Index = 17,
-            Name = "name",
-            Date = new DateTime(2018, 5, 22),
-            Visits = 13
-        };
-
 
         public RequestXmlSerializerTests()
         {
@@ -45,14 +27,14 @@ namespace Qualysoft.Evaluation.Application.UnitTests
         [Fact]
         public void ToStringShouldNotSerializeVisitsWhenNotSpecified()
         {
-            SerializeRequestAndAssert(requestStringXmlSerializer, r1, o =>
+            SerializeRequestAndAssert(requestStringXmlSerializer, Defines.NullVisitsRequest() , o =>
             {
                 string s = Assert.IsType<string>(o);
                 Assert.NotNull(s);
                 Assert.DoesNotContain("<visits>", s);
                 Assert.DoesNotContain("</visits>", s);
                 Assert.Contains("<ix>13</ix>", s);
-                Assert.Contains($"<name>{v}</name>", s);
+                Assert.Contains($"<name>{Defines.VISITS_NOT_SPECIFIED}</name>", s);
                 Assert.Contains("<dateRequested>2000-01-01</dateRequested>", s);
             });
         }
@@ -60,7 +42,7 @@ namespace Qualysoft.Evaluation.Application.UnitTests
         [Fact]
         public void ToStringShouldSerializeVisitsWhenSpecified()
         {
-            SerializeRequestAndAssert(requestStringXmlSerializer, r2, o =>
+            SerializeRequestAndAssert(requestStringXmlSerializer, Defines.FullRequest() , o =>
             {
                 string s = Assert.IsType<string>(o);
                 Assert.Contains("<visits>13</visits>", s);
@@ -73,11 +55,12 @@ namespace Qualysoft.Evaluation.Application.UnitTests
         [Fact]
         public void AppDataShouldNotSerializeVisitsWhenNotSpecified()
         {
-            SerializeRequestAndAssert(appDataFileRequestXmlSerializer, r1, o =>
+            var request = Defines.NullVisitsRequest();
+            SerializeRequestAndAssert(appDataFileRequestXmlSerializer, request, o =>
             {
                 Assert.NotNull(o);
                 ProduceXmlDto dto = Assert.IsType<ProduceXmlDto>(o);
-                Assert.Contains($@"App_Data\xml\{r1.GetDateString()}.xml", dto.FileName);
+                Assert.Contains($@"App_Data\xml\{request.GetDateString()}.xml", dto.FileName);
                 Assert.True(dto.StreamLength > 0);
             });
         }
@@ -85,7 +68,7 @@ namespace Qualysoft.Evaluation.Application.UnitTests
         [Fact]
         public void AppDataShouldSerializeVisitsWhenSpecified()
         {
-            SerializeRequestAndAssert(appDataFileRequestXmlSerializer, r2, o => Assert.NotNull(o));
+            SerializeRequestAndAssert(appDataFileRequestXmlSerializer, Defines.FullRequest(), o => Assert.NotNull(o));
         }
 
         private void SerializeRequestAndAssert(

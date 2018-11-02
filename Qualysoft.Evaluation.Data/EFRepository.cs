@@ -6,6 +6,12 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Generic EF Core repository
+    /// </summary>
+    /// <typeparam name="TDatabaseContext">EF Core db context that is adapted</typeparam>
+    /// <typeparam name="TAggregateRootType">aggregate root type dealt with</typeparam>
+    /// <typeparam name="TKeyType">aggregate root key type</typeparam>
     public class EFRepository<TDatabaseContext, TAggregateRootType, TKeyType>
         : IAsyncRepository<TAggregateRootType, TKeyType>
         where TDatabaseContext : DbContext 

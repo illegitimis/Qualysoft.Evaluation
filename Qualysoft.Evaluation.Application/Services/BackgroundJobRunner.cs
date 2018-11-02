@@ -1,15 +1,12 @@
 ﻿namespace Qualysoft.Evaluation.Application
 {
-using System;
-using System.Collections.Generic;
-using System.Text;
+    using System;
     using System.Threading.Tasks;
 
     public class BackgroundJobRunner : IBackgroundJobRunner
     {
         public BackgroundJobRunner()
         {
-
         }
         
         /// <summary>
@@ -26,7 +23,7 @@ using System.Text;
         /// Hangfire Background Process permalink
         /// https://github.com/HangfireIO/Hangfire/blob/f970f56a1bacbfa762a9db9030cadabc5e0b9cb2/src/Hangfire.Core/Server/ServerProcessExtensions.cs#L57
         /// </remarks>
-        public void Enqueue(Action action) => Task.Factory.StartNew(() => Failsafe(action), TaskCreationOptions.LongRunning);
+        public Task Enqueue(Action action) => Task.Factory.StartNew(() => Failsafe(action), TaskCreationOptions.LongRunning);
 
         private void Failsafe(Action action)
         {
