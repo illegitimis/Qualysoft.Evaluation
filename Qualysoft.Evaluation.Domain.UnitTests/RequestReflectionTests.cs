@@ -6,6 +6,9 @@ namespace Qualysoft.Evaluation.Domain.UnitTests
 
     public class RequestReflectionTests
     {
+        /// <summary>
+        /// Message: `System.MissingMethodException` : No parameterless constructor defined for this `Request` object.
+        /// </summary>
         [Fact]
         public void RequestShouldHaveParameterlessCtorNeededByBogusFaker()
         {

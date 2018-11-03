@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Linq;
     using System.Reflection;
     using Xunit;
 
@@ -17,13 +18,6 @@
                 types: new Type[] { typeof(DbContextOptions<EvaluationContext>) },
                 modifiers: null);
             Assert.NotNull(ctorInfo);
-        }
-
-        [Fact]
-        public void RepositoryHasOnlyBasicCRUDOperations()
-        {
-            var m = typeof(EFRepository<,,>).GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
-            Assert.NotNull(m);
         }
     }
 }

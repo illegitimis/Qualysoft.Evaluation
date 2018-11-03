@@ -21,7 +21,7 @@ using System.Collections.Generic;
         [Theory]
         [InlineData(5)]
         [InlineData(10)]
-        public void AllUpdatesAndAggregatesResults(int no)
+        public void GivenDataInDbAlreadyThenUpdatesEveryRecordAndAggregatesResults(int no)
         {
             // arrange
             requestRepository
@@ -43,7 +43,7 @@ using System.Collections.Generic;
         [Theory]
         [InlineData(3)]
         [InlineData(6)]
-        public void InsertOnlyAndAggregatesResults(int no)
+        public void GivenNoDbDataInsertsEverythingAndAggregatesResults(int no)
         {
             // arrange
             requestRepository

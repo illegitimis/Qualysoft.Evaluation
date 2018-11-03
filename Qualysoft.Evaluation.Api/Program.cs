@@ -13,6 +13,11 @@
                 .Run();
         }
 
+        /// <summary>
+        /// Initialize <see cref="WebHostBuilder"/>.
+        /// </summary>
+        /// <param name="args">args</param>
+        /// <returns><see cref="IWebHostBuilder"/> realization.</returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()

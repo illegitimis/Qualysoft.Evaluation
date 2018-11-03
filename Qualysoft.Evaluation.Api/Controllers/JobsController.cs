@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using static Microsoft.AspNetCore.Http.StatusCodes;
 
+    /// <summary>api/jobs</summary>
     [Route("api/[controller]")]
     [ApiController]
     public class JobsController : ControllerBase
@@ -15,6 +16,10 @@
         private readonly ISerializeXml xmlSerializer;
         private readonly IBackgroundJobRunner backgroundJobRunner;
 
+        /// <summary>ctor</summary>
+        /// <param name="requestRepo">injected request repo</param>
+        /// <param name="serializer">injected xml serializer</param>
+        /// <param name="jobber">Background Job Runner</param>
         public JobsController(
             IAsyncRepository<Request, int> requestRepo,
             ISerializeXml serializer,
@@ -38,7 +43,7 @@
 
             foreach (var request in requests)
             {
-                backgroundJobRunner.Enqueue(() => xmlSerializer.Persist(request));
+                await backgroundJobRunner.Enqueue(() => xmlSerializer.Persist(request));
             }
 
             return Ok();

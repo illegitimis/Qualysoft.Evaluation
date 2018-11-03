@@ -681,7 +681,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\acpopescu\\.nuget\\packages\\": {},
+    "C:\\Users\\Drei\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -690,14 +690,14 @@
       "projectUniqueName": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj",
       "projectName": "Qualysoft.Evaluation.Domain",
       "projectPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj",
-      "packagesPath": "C:\\Users\\acpopescu\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Drei\\.nuget\\packages\\",
       "outputPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\acpopescu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Drei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -23,10 +23,17 @@ using System;
         }
 
         [Fact]
-        public void PostNullCollectionShouldReturnOk()
+        public void PostNullCollectionShouldReturnBadRequest()
         {
             IActionResult result = _sut.Post(null);
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact]
+        public void PostEmptyCollectionShouldReturnBadRequest()
+        {
+            IActionResult result = _sut.Post(new List<RequestModel>().AsReadOnly());
+            Assert.IsType<BadRequestObjectResult>(result);
         }
 
         [Theory]
@@ -34,8 +41,12 @@ using System;
         [InlineData(13, 20)]
         public void PostReadonlyCollectionShouldReturnOkAndExpectedNumberOfAddedAndUpdatedItems(int added, int updated)
         {
-            _requestService.Upsert(Arg.Any<IReadOnlyCollection<RequestModel>>()).Returns(new RequestPostResponse(added, updated));
-            IActionResult result = _sut.Post(new List<RequestModel>().AsReadOnly());
+            _requestService
+                .Upsert(Arg.Is<IReadOnlyCollection<RequestModel>>(x => x.Count > 0))
+                .Returns(new RequestPostResponse(added, updated));
+
+            IActionResult result = _sut.Post(new List<RequestModel>(new[] { new RequestModel() }).AsReadOnly());
+
             var ok = Assert.IsType<OkObjectResult>(result);
             var response = Assert.IsType<RequestPostResponse>(ok.Value);
             Assert.Equal(added, response.Added);

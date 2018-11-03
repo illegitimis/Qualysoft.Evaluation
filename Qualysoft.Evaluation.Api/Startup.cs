@@ -49,8 +49,6 @@ namespace Qualysoft.Evaluation.Api
         /// <param name="services">Service descriptors collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
-
             services.AddMvcCore();
 
             services.AddMvc(options =>
@@ -105,7 +103,7 @@ namespace Qualysoft.Evaluation.Api
         {
             if (!Environment.IsStaging())
             {
-                throw new BasketNotFoundException(13);
+                throw new GeneralDomainException(Environment.EnvironmentName);
             }
 
             services.AddDbContext<EvaluationContext>(options => options.UseSqlite("hoist.db"));
@@ -121,7 +119,7 @@ namespace Qualysoft.Evaluation.Api
         {
             if (!Environment.IsDevelopment())
             {
-                throw new BasketNotFoundException(17);
+                throw new GeneralDomainException(Environment.EnvironmentName);
             }
 
             var logger = LoggerFactory.CreateLogger<Startup>();
@@ -139,7 +137,7 @@ namespace Qualysoft.Evaluation.Api
         {
             if (!Environment.IsProduction())
             {
-                throw new BasketNotFoundException(11);
+                throw new GeneralDomainException(Environment.EnvironmentName);
             }
 
             services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
@@ -159,7 +157,7 @@ namespace Qualysoft.Evaluation.Api
         /// <param name="env">web hosting environment</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseStatusCodePagesWithRedirects(@"{ERROR_HANDLING_PATH}/{0}");
+            app.UseStatusCodePagesWithRedirects($"{ERROR_HANDLING_PATH}/{0}");
 
             app.UseStaticFiles();
 
