@@ -5770,11 +5770,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain.UnitTests\\Qualysoft.Evaluation.Domain.UnitTests.csproj",
+      "projectUniqueName": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain.UnitTests\\Qualysoft.Evaluation.Domain.UnitTests.csproj",
       "projectName": "Qualysoft.Evaluation.Domain.UnitTests",
-      "projectPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain.UnitTests\\Qualysoft.Evaluation.Domain.UnitTests.csproj",
+      "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain.UnitTests\\Qualysoft.Evaluation.Domain.UnitTests.csproj",
       "packagesPath": "C:\\Users\\Drei\\.nuget\\packages\\",
-      "outputPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain.UnitTests\\obj\\",
+      "outputPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5793,8 +5793,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj": {
-              "projectPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj"
+            "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj": {
+              "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj"
             }
           }
         }

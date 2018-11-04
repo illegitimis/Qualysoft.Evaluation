@@ -1,22 +1,17 @@
 namespace Qualysoft.Evaluation.Api.IntegrationTests
 {
-    using Microsoft.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.TestHost;
     using Newtonsoft.Json;
     using Qualysoft.Evaluation.Application;
-    using Qualysoft.Evaluation.Data;
-    using Qualysoft.Evaluation.Domain;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
     using Xunit;
 
-    public class ServerTestHost
+    public sealed class ServerTestHost : IDisposable
     {
         const string ApiData = "/api/Data";
         const string ApiJobsSaveFiles = "/api/Jobs/saveFiles";
@@ -132,6 +127,21 @@ namespace Qualysoft.Evaluation.Api.IntegrationTests
             Assert.NotNull(httpResponseMessage);
             Assert.True(httpResponseMessage.IsSuccessStatusCode);
             Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
+        }
+
+        [Fact]
+        public async Task SwaggerUIShouldGetGeneratedAtRouteBase()
+        {
+            var httpResponseMessage = await apiClient.GetAsync("index.html");
+            Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
+            var body = await httpResponseMessage.Content.ReadAsStringAsync();
+            Assert.Contains("<title>A simple ASP.NET Core Web API</title>", body);
+        }
+
+        public void Dispose()
+        {
+            apiClient.Dispose();
+            testServer.Dispose();
         }
     }
 }

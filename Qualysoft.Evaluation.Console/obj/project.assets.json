@@ -78,7 +78,7 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
         },
         "build": {
-          "build/netcoreapp2.0/Microsoft.EntityFrameworkCore.Design.props": {}
+          "build/netcoreapp2.0/_._": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/2.1.4": {
@@ -709,6 +709,19 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
+      "System.Configuration.ConfigurationManager/4.5.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.5.0",
+          "System.Security.Permissions": "4.5.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        }
+      },
       "System.Data.SqlClient/4.5.1": {
         "type": "package",
         "dependencies": {
@@ -1022,7 +1035,7 @@
           "System.Security.Principal.Windows": "4.5.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Security.AccessControl.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Security.AccessControl.dll": {}
@@ -1034,13 +1047,40 @@
           }
         }
       },
+      "System.Security.Cryptography.ProtectedData/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Security.Permissions/4.5.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.AccessControl": "4.5.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Security.Permissions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Permissions.dll": {}
+        }
+      },
       "System.Security.Principal.Windows/4.5.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Security.Principal.Windows.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Security.Principal.Windows.dll": {}
@@ -1122,6 +1162,25 @@
         },
         "runtime": {
           "bin/placeholder/Qualysoft.Evaluation.Application.dll": {}
+        }
+      },
+      "Qualysoft.Evaluation.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Bogus": "24.3.0",
+          "Microsoft.EntityFrameworkCore": "2.1.4",
+          "Microsoft.EntityFrameworkCore.Design": "2.1.4",
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.1.4",
+          "Microsoft.EntityFrameworkCore.Sqlite": "2.1.4",
+          "Qualysoft.Evaluation.Application": "1.0.0",
+          "Qualysoft.Evaluation.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Qualysoft.Evaluation.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Qualysoft.Evaluation.Data.dll": {}
         }
       },
       "Qualysoft.Evaluation.Domain/1.0.0": {
@@ -2377,6 +2436,26 @@
         "version.txt"
       ]
     },
+    "System.Configuration.ConfigurationManager/4.5.0": {
+      "sha512": "+2SYYKwbN0n+9SrBanflZdaVleFkytEfTNzOu+f3SK0vROMMrorpw1UJyHJQ1ZooughRxPmLj8Fh5N2tSe7sdA==",
+      "type": "package",
+      "path": "system.configuration.configurationmanager/4.5.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Configuration.ConfigurationManager.dll",
+        "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll",
+        "ref/net461/System.Configuration.ConfigurationManager.dll",
+        "ref/net461/System.Configuration.ConfigurationManager.xml",
+        "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll",
+        "ref/netstandard2.0/System.Configuration.ConfigurationManager.xml",
+        "system.configuration.configurationmanager.4.5.0.nupkg.sha512",
+        "system.configuration.configurationmanager.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Data.SqlClient/4.5.1": {
       "sha512": "qXTvTFkBds7bnN+ntBMHGvmH3pCAkfT4TE1z2Xvfqo4wKMQC77O4aXsYCc7dzCESC+/Gom6l0GLuebpFx7MDvg==",
       "type": "package",
@@ -3625,6 +3704,66 @@
         "version.txt"
       ]
     },
+    "System.Security.Cryptography.ProtectedData/4.5.0": {
+      "sha512": "s/MFK8BvgtejZj5a8qAPDXEGBtWkpFX98qwQP/wqVa9CgIC7LrKHxDFdlN5x6afGAb0ZVBVGIZlCdBLnO2QjZw==",
+      "type": "package",
+      "path": "system.security.cryptography.protecteddata/4.5.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Security.Cryptography.ProtectedData.dll",
+        "lib/net461/System.Security.Cryptography.ProtectedData.dll",
+        "lib/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Security.Cryptography.ProtectedData.dll",
+        "ref/net461/System.Security.Cryptography.ProtectedData.dll",
+        "ref/net461/System.Security.Cryptography.ProtectedData.xml",
+        "ref/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/win/lib/net46/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/net461/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
+        "system.security.cryptography.protecteddata.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Security.Permissions/4.5.0": {
+      "sha512": "vDQ7q30Soe0a1cPhvxn+7IFmMeTG5IP+hTQrnKQDjTNpD2epqwbZSzMM2Git5TXBr4Kwwhc/0SEtJY0qPoiegA==",
+      "type": "package",
+      "path": "system.security.permissions/4.5.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Security.Permissions.dll",
+        "lib/netstandard2.0/System.Security.Permissions.dll",
+        "ref/net461/System.Security.Permissions.dll",
+        "ref/net461/System.Security.Permissions.xml",
+        "ref/netstandard2.0/System.Security.Permissions.dll",
+        "ref/netstandard2.0/System.Security.Permissions.xml",
+        "system.security.permissions.4.5.0.nupkg.sha512",
+        "system.security.permissions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Security.Principal.Windows/4.5.0": {
       "sha512": "WA9ETb/pY3BjnxKjBUHEgO59B7d/nnmjHFsqjJ2eDT780nD769CT1/bw2ia0Z6W7NqlcqokE6sKGKa6uw88XGA==",
       "type": "package",
@@ -3920,6 +4059,11 @@
       "path": "../Qualysoft.Evaluation.Application/Qualysoft.Evaluation.Application.csproj",
       "msbuildProject": "../Qualysoft.Evaluation.Application/Qualysoft.Evaluation.Application.csproj"
     },
+    "Qualysoft.Evaluation.Data/1.0.0": {
+      "type": "project",
+      "path": "../Qualysoft.Evaluation.Data/Qualysoft.Evaluation.Data.csproj",
+      "msbuildProject": "../Qualysoft.Evaluation.Data/Qualysoft.Evaluation.Data.csproj"
+    },
     "Qualysoft.Evaluation.Domain/1.0.0": {
       "type": "project",
       "path": "../Qualysoft.Evaluation.Domain/Qualysoft.Evaluation.Domain.csproj",
@@ -3928,14 +4072,9 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "Bogus >= 24.3.0",
-      "Microsoft.EntityFrameworkCore >= 2.1.4",
-      "Microsoft.EntityFrameworkCore.Design >= 2.1.4",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.4",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.4",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Qualysoft.Evaluation.Application >= 1.0.0",
-      "Qualysoft.Evaluation.Domain >= 1.0.0"
+      "Qualysoft.Evaluation.Data >= 1.0.0",
+      "System.Configuration.ConfigurationManager >= 4.5.0"
     ]
   },
   "packageFolders": {
@@ -3945,11 +4084,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Data\\Qualysoft.Evaluation.Data.csproj",
-      "projectName": "Qualysoft.Evaluation.Data",
-      "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Data\\Qualysoft.Evaluation.Data.csproj",
+      "projectUniqueName": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Console\\Qualysoft.Evaluation.Console.csproj",
+      "projectName": "Qualysoft.Evaluation.Console",
+      "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Console\\Qualysoft.Evaluation.Console.csproj",
       "packagesPath": "C:\\Users\\Drei\\.nuget\\packages\\",
-      "outputPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Data\\obj\\",
+      "outputPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Console\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3968,11 +4107,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Application\\Qualysoft.Evaluation.Application.csproj": {
-              "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Application\\Qualysoft.Evaluation.Application.csproj"
-            },
-            "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj": {
-              "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Domain\\Qualysoft.Evaluation.Domain.csproj"
+            "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Data\\Qualysoft.Evaluation.Data.csproj": {
+              "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Data\\Qualysoft.Evaluation.Data.csproj"
             }
           }
         }
@@ -3986,31 +4122,14 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "Bogus": {
-            "target": "Package",
-            "version": "[24.3.0, )"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[2.1.4, )"
-          },
-          "Microsoft.EntityFrameworkCore.Design": {
-            "target": "Package",
-            "version": "[2.1.4, )"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "[2.1.4, )"
-          },
-          "Microsoft.EntityFrameworkCore.Sqlite": {
-            "target": "Package",
-            "version": "[2.1.4, )"
-          },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "System.Configuration.ConfigurationManager": {
+            "target": "Package",
+            "version": "[4.5.0, )"
           }
         },
         "imports": [

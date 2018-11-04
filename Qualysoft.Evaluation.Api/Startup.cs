@@ -90,7 +90,6 @@
             services.AddSwaggerExamples();
         }
 
-
         /// <summary>Configure Staging Services</summary>
         /// <param name="services"></param>
         /// <remarks>Intentionally left without any IoC service registrations</remarks>
@@ -148,7 +147,7 @@
 
             ConfigureServices(services);
         }
-
+        
         #endregion
 
         #region Configure<EnvironmentName>Container
@@ -220,7 +219,7 @@
             app.UseExceptionHandler(ERROR_HANDLING_PATH);
             Configure(app, env);
         }
-               
+
         #endregion
     }
 }

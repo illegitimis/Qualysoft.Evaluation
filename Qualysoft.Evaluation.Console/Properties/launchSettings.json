@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Qualysoft.Evaluation.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "13 ProdHttp"
+    }
+  }
+}

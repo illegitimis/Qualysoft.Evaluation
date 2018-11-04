@@ -58,6 +58,39 @@
           "lib/netstandard1.3/Castle.Core.dll": {}
         }
       },
+      "dbup/4.1.0": {
+        "type": "package",
+        "dependencies": {
+          "dbup-sqlserver": "4.1.0"
+        }
+      },
+      "dbup-core/4.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.4.0",
+          "System.Diagnostics.TraceSource": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/dbup-core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/dbup-core.dll": {}
+        }
+      },
+      "dbup-sqlserver/4.1.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Data.SqlClient": "4.4.0",
+          "dbup-core": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/dbup-sqlserver.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/dbup-sqlserver.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.Abstractions/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -1521,6 +1554,9 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
+      "OpenCover/4.6.519": {
+        "type": "package"
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1760,6 +1796,25 @@
         },
         "runtime": {
           "lib/netstandard2.0/Scrutor.dll": {}
+        }
+      },
+      "Simple.Migrations/0.9.19": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Collections": "4.3.0",
+          "System.Console": "4.3.0",
+          "System.Data.Common": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Simple.Migrations.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Simple.Migrations.dll": {}
         }
       },
       "SQLitePCLRaw.bundle_green/1.1.11": {
@@ -2255,6 +2310,25 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Console.dll": {}
+        }
+      },
+      "System.Data.Common/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.2/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
         }
       },
       "System.Data.SqlClient/4.5.1": {
@@ -3714,11 +3788,14 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "Autofac.Extensions.DependencyInjection": "4.3.0",
+          "DbUp": "4.1.0",
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1",
+          "OpenCover": "4.6.519",
           "Qualysoft.Evaluation.Application": "1.0.0",
           "Qualysoft.Evaluation.Data": "1.0.0",
           "Qualysoft.Evaluation.Domain": "1.0.0",
+          "Simple.Migrations": "0.9.19",
           "Swashbuckle.AspNetCore.Filters": "4.3.1",
           "Swashbuckle.AspNetCore.Swagger": "3.0.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "3.0.0",
@@ -3839,6 +3916,41 @@
         "lib/net45/Castle.Core.dll",
         "lib/netstandard1.3/Castle.Core.dll",
         "readme.txt"
+      ]
+    },
+    "dbup/4.1.0": {
+      "sha512": "umg+xIrDI05S+AE8OkIGi5jv7+DMvLpsZgGYF13x45FtuIzcjhQq70EDfkAnz+US6DieNjKgyU0XRfLwlMHEgA==",
+      "type": "package",
+      "path": "dbup/4.1.0",
+      "files": [
+        ".signature.p7s",
+        "Shim.txt",
+        "dbup.4.1.0.nupkg.sha512",
+        "dbup.nuspec"
+      ]
+    },
+    "dbup-core/4.1.0": {
+      "sha512": "nNlmRyubk6ytvdbV0ERNyJ53TbEc28xkVef40Uk6ufi/Fze/eGHa+q6Mfwsz2T7sJeNjTVZvYXa/Z43Ez9TDxQ==",
+      "type": "package",
+      "path": "dbup-core/4.1.0",
+      "files": [
+        "dbup-core.4.1.0.nupkg.sha512",
+        "dbup-core.nuspec",
+        "lib/net35/dbup-core.dll",
+        "lib/net45/dbup-core.dll",
+        "lib/netstandard1.3/dbup-core.dll",
+        "lib/netstandard2.0/dbup-core.dll"
+      ]
+    },
+    "dbup-sqlserver/4.1.0": {
+      "sha512": "ThNRKeZBDlgw4PErMuBU2GnsWeK6m9WFrHlQy9wmMUJfDE90/DPO74idmHEoMCyRK5TqanrQICh9jgfaJsBQ9g==",
+      "type": "package",
+      "path": "dbup-sqlserver/4.1.0",
+      "files": [
+        "dbup-sqlserver.4.1.0.nupkg.sha512",
+        "dbup-sqlserver.nuspec",
+        "lib/net35/dbup-sqlserver.dll",
+        "lib/netstandard1.3/dbup-sqlserver.dll"
       ]
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.1.1": {
@@ -5738,6 +5850,57 @@
         "nuget.frameworks.nuspec"
       ]
     },
+    "OpenCover/4.6.519": {
+      "sha512": "oReudTijK4ghbd1GNTzl7Su2KzOufj2evTS5PTGAGC5ThfrThcInB/t9w2ISkcEacOsgLQTdG+PO0UUUGZ+zTw==",
+      "type": "package",
+      "path": "opencover/4.6.519",
+      "files": [
+        "License.rtf",
+        "MSBuild/OpenCover.MSBuild.dll",
+        "MSBuild/OpenCover.targets",
+        "SampleSln/.nuget/packages.config",
+        "SampleSln/Bom/Bom.csproj",
+        "SampleSln/Bom/BomManager.cs",
+        "SampleSln/Bom/Properties/AssemblyInfo.cs",
+        "SampleSln/BomSample.sln",
+        "SampleSln/BomTest/BomManagerTests.cs",
+        "SampleSln/BomTest/BomTest.csproj",
+        "SampleSln/BomTest/Properties/AssemblyInfo.cs",
+        "SampleSln/BomTest/packages.config",
+        "SampleSln/coverage.bat",
+        "SampleSln/packages/repositories.config",
+        "Samples/x64/OpenCover.Simple.Target.exe",
+        "Samples/x64/OpenCover.Simple.Target.pdb",
+        "Samples/x86/OpenCover.Simple.Target.exe",
+        "Samples/x86/OpenCover.Simple.Target.pdb",
+        "docs/ReleaseNotes.txt",
+        "docs/Usage.rtf",
+        "opencover.4.6.519.nupkg.sha512",
+        "opencover.nuspec",
+        "readme.txt",
+        "tools/Autofac.Configuration.dll",
+        "tools/Autofac.dll",
+        "tools/CrashReporter.NET.dll",
+        "tools/Gendarme.Framework.dll",
+        "tools/Gendarme.Rules.Maintainability.dll",
+        "tools/Mono.Cecil.Mdb.dll",
+        "tools/Mono.Cecil.Pdb.dll",
+        "tools/Mono.Cecil.dll",
+        "tools/OpenCover.Console.exe",
+        "tools/OpenCover.Console.exe.config",
+        "tools/OpenCover.Console.pdb",
+        "tools/OpenCover.Extensions.dll",
+        "tools/OpenCover.Extensions.pdb",
+        "tools/OpenCover.Framework.dll",
+        "tools/OpenCover.Framework.pdb",
+        "tools/log4net.config",
+        "tools/log4net.dll",
+        "tools/x64/OpenCover.Profiler.dll",
+        "tools/x86/OpenCover.Profiler.dll",
+        "transform/simple_report.xslt",
+        "transform/transform.ps1"
+      ]
+    },
     "Remotion.Linq/2.2.0": {
       "sha512": "fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "type": "package",
@@ -6018,6 +6181,21 @@
         "lib/netstandard2.0/Scrutor.xml",
         "scrutor.3.0.1.nupkg.sha512",
         "scrutor.nuspec"
+      ]
+    },
+    "Simple.Migrations/0.9.19": {
+      "sha512": "N0wCQpuBIN+ykD4dv6SrfcEYGP5VHIEuwF/I3BilV40sYUb1Hk2jgig8Xfx9SmLW7bqId7lgAfVLHRpdU5ybMQ==",
+      "type": "package",
+      "path": "simple.migrations/0.9.19",
+      "files": [
+        "lib/net45/Simple.Migrations.dll",
+        "lib/net45/Simple.Migrations.xml",
+        "lib/netstandard1.2/Simple.Migrations.dll",
+        "lib/netstandard1.2/Simple.Migrations.xml",
+        "lib/netstandard1.3/Simple.Migrations.dll",
+        "lib/netstandard1.3/Simple.Migrations.xml",
+        "simple.migrations.0.9.19.nupkg.sha512",
+        "simple.migrations.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_green/1.1.11": {
@@ -6940,6 +7118,55 @@
         "ref/xamarinwatchos10/_._",
         "system.console.4.3.0.nupkg.sha512",
         "system.console.nuspec"
+      ]
+    },
+    "System.Data.Common/4.3.0": {
+      "sha512": "lm6E3T5u7BOuEH0u18JpbJHxBfOJPuCyl4Kg1RH10ktYLp5uEEE1xKrHW56/We4SnZpGAuCc9N0MJpSDhTHZGQ==",
+      "type": "package",
+      "path": "system.data.common/4.3.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.Common.dll",
+        "lib/netstandard1.2/System.Data.Common.dll",
+        "lib/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.xml",
+        "ref/netstandard1.2/de/System.Data.Common.xml",
+        "ref/netstandard1.2/es/System.Data.Common.xml",
+        "ref/netstandard1.2/fr/System.Data.Common.xml",
+        "ref/netstandard1.2/it/System.Data.Common.xml",
+        "ref/netstandard1.2/ja/System.Data.Common.xml",
+        "ref/netstandard1.2/ko/System.Data.Common.xml",
+        "ref/netstandard1.2/ru/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/de/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/es/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/fr/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/it/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ja/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ko/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ru/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hans/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hant/System.Data.Common.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.data.common.4.3.0.nupkg.sha512",
+        "system.data.common.nuspec"
       ]
     },
     "System.Data.SqlClient/4.5.1": {
@@ -10758,11 +10985,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api.UnitTests\\Qualysoft.Evaluation.Api.UnitTests.csproj",
+      "projectUniqueName": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api.UnitTests\\Qualysoft.Evaluation.Api.UnitTests.csproj",
       "projectName": "Qualysoft.Evaluation.Api.UnitTests",
-      "projectPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api.UnitTests\\Qualysoft.Evaluation.Api.UnitTests.csproj",
+      "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api.UnitTests\\Qualysoft.Evaluation.Api.UnitTests.csproj",
       "packagesPath": "C:\\Users\\Drei\\.nuget\\packages\\",
-      "outputPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api.UnitTests\\obj\\",
+      "outputPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10781,8 +11008,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api\\Qualysoft.Evaluation.Api.csproj": {
-              "projectPath": "D:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api\\Qualysoft.Evaluation.Api.csproj"
+            "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api\\Qualysoft.Evaluation.Api.csproj": {
+              "projectPath": "d:\\GIT\\Qualysoft.Evaluation\\Qualysoft.Evaluation.Api\\Qualysoft.Evaluation.Api.csproj"
             }
           }
         }

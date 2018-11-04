@@ -1,6 +1,5 @@
 ﻿namespace Qualysoft.Evaluation.Api.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Qualysoft.Evaluation.Api.MvcFilters;
     using Qualysoft.Evaluation.Api.Swagger;
@@ -27,9 +26,7 @@
 
         /// <summary>Persists a request collection</summary>
         /// <param name="requestDtos">collection of request models</param>
-        /// <remarks>
-        /// This endpoint receives a collection of serialized JSON models and stores them in a database created using automated database migrations.
-        /// </remarks>
+        /// <remarks>This endpoint receives a collection of serialized JSON models and stores them in a database created using automated database migrations.</remarks>
         [HttpPost]
         [ProducesResponseType(typeof(RequestPostResponse), Status200OK)]
         [SwaggerResponse(Status200OK, "OK 200", typeof(RequestPostResponse))]
