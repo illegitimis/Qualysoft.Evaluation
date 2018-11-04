@@ -9,18 +9,21 @@
 
     using static Microsoft.AspNetCore.Http.StatusCodes;
 
+    /// <summary />
     public class GlobalExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private readonly IHostingEnvironment env;
 
         private readonly IHttpContextAccessor httpContextAccessor;
 
+        /// <summary />
         public GlobalExceptionFilterAttribute(IHostingEnvironment env, IHttpContextAccessor httpContextAccessor)
         {
             this.env = env;
             this.httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary />
         public override Task OnExceptionAsync(ExceptionContext context)
         {
             var task = base.OnExceptionAsync(context);
@@ -33,67 +36,33 @@
 
                 switch (context.Exception)
                 {
-                    /*
-                    case RequestValidationException exception:
-                        {
-                            var json = new JsonErrorResponse(exception.ValidationErrors);
-                            context.Result = new BadRequestObjectResult(json);
-                            context.HttpContext.Response.StatusCode = Status400BadRequest;
-                            break;
-                        }
+                    case EnvironmentMismatchException exception:
+                    {
+                        var json = new JsonErrorResponse(exception.Message);
+                        context.Result = new NotImplemented501ObjectResult(json);
+                        context.HttpContext.Response.StatusCode = Status501NotImplemented;
+                        break;
+                    }
 
-                    case QueryException exception:
-                        {
-                            var json = new JsonErrorResponse(exception.Errors);
-                            context.Result = (exception.ErrorCode == QueryErrorCode.NotFound)
-                                ? (IActionResult)new NotFoundObjectResult(json)
-                                : (IActionResult)new BadRequestObjectResult(json);
-                            context.HttpContext.Response.StatusCode = (exception.ErrorCode == QueryErrorCode.NotFound) ? Status404NotFound : Status400BadRequest;
-                            break;
-                        }
-
-                    case OptimisticConcurrencyException exception:
-                        {
-                            var json = new JsonErrorResponse(exception.Message);
-                            context.Result = new PreconditionFailedObjectResult(json);
-                            context.HttpContext.Response.StatusCode = Status412PreconditionFailed;
-                            break;
-                        }
-
-                    case UnitAuthorizationException exception:
-                        {
-                            var json = new JsonErrorResponse(exception.Message);
-                            context.Result = new ForbiddenObjectResult(json);
-                            context.HttpContext.Response.StatusCode = Status403Forbidden;
-                            break;
-                        }
-
-                    case FMOBusinessException exception:
-                        {
-                            var json = new JsonErrorResponse(exception.Message);
-                            context.Result = new BadRequestObjectResult(json);
-                            context.HttpContext.Response.StatusCode = Status417ExpectationFailed;
-                            break;
-                        }
-                        */
                     default:
+                    {
+                        var json = new JsonErrorResponse("An unknown error occured.");
+                        if (env.IsDevelopment() || env.IsEnvironment(ConfigurationHelper.Development))
                         {
-                            var json = new JsonErrorResponse("An unknown error occured.");
-                            if (env.IsDevelopment() || env.IsEnvironment(ConfigurationHelper.Development))
-                            {
-                                json.DeveloperMessage = context.Exception;
-                            }
-
-                            context.Result = new InternalServerErrorObjectResult(json);
-                            context.HttpContext.Response.StatusCode = Status500InternalServerError;
-                            break;
+                            json.DeveloperMessage = context.Exception;
                         }
+
+                        context.Result = new InternalServerError500ObjectResult(json);
+                        context.HttpContext.Response.StatusCode = Status500InternalServerError;
+                        break;
+                    }
                 }
 
                 context.ExceptionHandled = true;
             });
         }
 
+        /// <summary />
         protected virtual void HandleAdditionalActions(ExceptionContext context)
         {
         }

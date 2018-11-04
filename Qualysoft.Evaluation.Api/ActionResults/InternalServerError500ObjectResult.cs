@@ -3,9 +3,11 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    public class InternalServerErrorObjectResult : ObjectResult
+    /// <summary />
+    public class InternalServerError500ObjectResult : ObjectResult
     {
-        public InternalServerErrorObjectResult(object error)
+        /// <summary />
+        public InternalServerError500ObjectResult(object error)
             : base(error)
         {
             StatusCode = StatusCodes.Status500InternalServerError;

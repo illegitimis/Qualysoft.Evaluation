@@ -1,6 +1,4 @@
-﻿using Qualysoft.Evaluation.Application;
-
-namespace Qualysoft.Evaluation.Api
+﻿namespace Qualysoft.Evaluation.Api
 {
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
@@ -32,6 +30,7 @@ namespace Qualysoft.Evaluation.Api
         const string DESCRIPTION = "A simple ASP.NET Core Web API";
         const string ERROR_HANDLING_PATH = "/error";
 
+        /// <summary />
         public Startup(IHostingEnvironment env, IConfiguration config, ILoggerFactory loggerFactory)
         {
             Configuration = config;
@@ -39,8 +38,11 @@ namespace Qualysoft.Evaluation.Api
             LoggerFactory = loggerFactory;
         }
 
+        /// <summary />
         public IConfiguration Configuration { get; }
+        /// <summary />
         public IHostingEnvironment Environment { get; }
+        /// <summary />
         public ILoggerFactory LoggerFactory { get; }
 
         #region Configure<EnvironmentName>Services
@@ -203,6 +205,7 @@ namespace Qualysoft.Evaluation.Api
             Configure(app, env);
         }
 
+        /// <summary />
         public void ConfigureStaging(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (!env.IsStaging()) return;
@@ -210,6 +213,7 @@ namespace Qualysoft.Evaluation.Api
             Configure(app, env);
         }
 
+        /// <summary />
         public void ConfigureProduction(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (!env.IsProduction()) return;

@@ -11,7 +11,6 @@
     public class PingController : ControllerBase
     {
         /// <summary>test api ping for up and running</summary>
-        /// <remarks></remarks>
         [HttpGet]
         [AllowAnonymous]
         [ProducesResponseType(typeof(void), Status200OK)]
