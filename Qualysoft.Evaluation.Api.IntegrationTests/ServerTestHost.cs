@@ -27,11 +27,6 @@ namespace Qualysoft.Evaluation.Api.IntegrationTests
 
         public ServerTestHost()
         {
-            /*
-            var webHostBuilder = WebHost.CreateDefaultBuilder();
-            webHostBuilder.UseContentRoot(Directory.GetCurrentDirectory());
-            webHostBuilder.UseStartup<Startup>();
-            */
             var webHostBuilder = Program.CreateWebHostBuilder(new string[0]);
             testServer = new TestServer(webHostBuilder);
             apiClient = testServer.CreateClient();
@@ -125,6 +120,18 @@ namespace Qualysoft.Evaluation.Api.IntegrationTests
             // Assert response body
             var body = await httpResponseMessage.Content.ReadAsStringAsync();
             Assert.Equal("requestDtos", body);
+        }
+
+        [Fact]
+        public async Task PositiveTestJobsSaveFiles()
+        {
+            // act
+            var httpResponseMessage = await apiClient.GetAsync(ApiJobsSaveFiles);
+
+            // assert status
+            Assert.NotNull(httpResponseMessage);
+            Assert.True(httpResponseMessage.IsSuccessStatusCode);
+            Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
         }
     }
 }

@@ -22,7 +22,6 @@ using System.Threading.Tasks;
                 context.Result = new BadRequestObjectResult(context.ModelState);
             }
 
-            /*
             if (context.Controller.GetType() == typeof(Controllers.DataController) &&
                 context.ActionDescriptor.RouteValues["action"] == "Post" &&
                 context.ActionDescriptor.RouteValues["controller"] == "Data" &&
@@ -30,8 +29,7 @@ using System.Threading.Tasks;
                 !roc.Any())
             {
                 context.Result = new BadRequestObjectResult("requestDtos");
-            }
-            */
+            }            
         }
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

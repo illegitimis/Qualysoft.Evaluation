@@ -56,7 +56,7 @@ using System;
         [Fact]
         public void SitePing()
         {
-            Assert.IsType<OkResult>(_sut.Ping());
+            Assert.IsType<OkResult>((new PingController()).Get());
         }
     }
 }

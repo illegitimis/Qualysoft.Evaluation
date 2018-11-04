@@ -2,6 +2,8 @@
 
 namespace Qualysoft.Evaluation.Api
 {
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -84,26 +86,17 @@ namespace Qualysoft.Evaluation.Api
             });
 
             services.AddSwaggerExamples();
-
-            // TODO: Autofac
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAsyncRepository<Request, int>, EFRepository<EvaluationContext, Request, int>>();
-            services.AddScoped<IRequestService, RequestService>();
-            services.AddScoped<IBackgroundJobRunner, BackgroundJobRunner>();
-            services.AddScoped<ISerializeXml, AppDataFileRequestXmlSerializer>();
-            services.AddSingleton<IClassMapper<Request, CT_XSD_Request>, DomainToXmlSerializedRequestMapper>();
         }
 
 
-        /// <summary>
-        /// Configure Staging Services
-        /// </summary>
+        /// <summary>Configure Staging Services</summary>
         /// <param name="services"></param>
+        /// <remarks>Intentionally left without any IoC service registrations</remarks>
         public void ConfigureStagingServices(IServiceCollection services)
         {
             if (!Environment.IsStaging())
             {
-                throw new GeneralDomainException(Environment.EnvironmentName);
+                throw new EnvironmentMismatchException(Environment.EnvironmentName);
             }
 
             services.AddDbContext<EvaluationContext>(options => options.UseSqlite("hoist.db"));
@@ -119,40 +112,60 @@ namespace Qualysoft.Evaluation.Api
         {
             if (!Environment.IsDevelopment())
             {
-                throw new GeneralDomainException(Environment.EnvironmentName);
+                throw new EnvironmentMismatchException(Environment.EnvironmentName);
             }
 
             var logger = LoggerFactory.CreateLogger<Startup>();
             logger.LogInformation("Development environment");
+
+            // Microsoft.Extensions.DependencyInjection & in memory db for deveopment
             services.AddDbContext<EvaluationContext>(opt => opt.UseInMemoryDatabase("Hoist"));
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAsyncRepository<Request, int>, EFRepository<EvaluationContext, Request, int>>();
+            services.AddScoped<IRequestService, RequestService>();
+            services.AddScoped<IBackgroundJobRunner, BackgroundJobRunner>();
+            services.AddScoped<ISerializeXml, AppDataFileRequestXmlSerializer>();
+            services.AddSingleton<IClassMapper<Request, CT_XSD_Request>, DomainToXmlSerializedRequestMapper>();
+            
             ConfigureServices(services);
         }
 
-        /// <summary>
-        /// Development service configuration
-        /// </summary>
+        /// <summary>Production services configuration</summary>
         /// <param name="services"></param>
         public void ConfigureProductionServices(IServiceCollection services)
         {
             if (!Environment.IsProduction())
             {
-                throw new GeneralDomainException(Environment.EnvironmentName);
+                throw new EnvironmentMismatchException(Environment.EnvironmentName);
             }
 
+            // autofac & sql server db for production
+            services.AddAutofac(builder => builder.RegisterModule<AutofacModule>());
             services.AddDbContext<EvaluationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
             ConfigureServices(services);
         }
 
+        #endregion
+
+        #region Configure<EnvironmentName>Container
+
+        /// <summary>
+        /// Register things directly with Autofac, only for production environment
+        /// This runs after ConfigureServices so the things here will override registrations made in ConfigureServices.
+        /// </summary>
+        /// <param name="builder">Autofac Container builder</param>
+        public void ConfigureProductionContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AutofacModule());
+        }
 
         #endregion
 
         #region Configure<EnvironmentName>
 
-        /// <summary>
-        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        /// </summary>
+        /// <summary>Called by the runtime. Configure the HTTP request pipeline.</summary>
         /// <param name="app">configures request pipeline</param>
         /// <param name="env">web hosting environment</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -175,10 +188,18 @@ namespace Qualysoft.Evaluation.Api
             app.UseMvc();
         }
 
+        /// <summary>Called before <see cref="Configure"/> for development environment</summary>
+        /// <param name="app">request pipeline configurator</param>
+        /// <param name="env">web hosting environment</param>
         public void ConfigureDevelopment(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (!env.IsDevelopment()) return;
+
+            LoggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
+            LoggerFactory.AddDebug();
+            
             app.UseDeveloperExceptionPage();
+
             Configure(app, env);
         }
 

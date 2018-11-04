@@ -25,7 +25,7 @@
             this.requestService = requestService;
         }
 
-        /// <summary>POST /api/data</summary>
+        /// <summary>Persists a request collection</summary>
         /// <param name="requestDtos">collection of request models</param>
         /// <remarks>
         /// This endpoint receives a collection of serialized JSON models and stores them in a database created using automated database migrations.
@@ -43,13 +43,5 @@
             (requestDtos == null || !requestDtos.Any())
                 ? (IActionResult)BadRequest(nameof(requestDtos))
                 : Ok(requestService.Upsert(requestDtos));
-
-        /// <summary>GET api/data</summary>
-        /// <remarks>ping api</remarks>
-        [HttpGet]
-        [AllowAnonymous]
-        [ProducesResponseType(typeof(void), Status200OK)]
-        [SwaggerResponse(Status200OK, "OK 200", typeof(void))]
-        public ActionResult Ping() => Ok();
     }
 }

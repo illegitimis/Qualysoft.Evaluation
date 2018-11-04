@@ -2,10 +2,16 @@
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
+    using Autofac.Extensions.DependencyInjection;
 
+    /// <summary>web api entry point</summary>
     public class Program
     {
+        /// <remarks>Sonar lint warning</remarks>
+        protected Program() { }
+
+        /// <summary>Run web app from console</summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args)
@@ -13,18 +19,17 @@
                 .Run();
         }
 
-        /// <summary>
-        /// Initialize <see cref="WebHostBuilder"/>.
-        /// </summary>
+        /// <summary>Initialize <see cref="WebHostBuilder"/>.</summary>
         /// <param name="args">args</param>
         /// <returns><see cref="IWebHostBuilder"/> realization.</returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+                .CaptureStartupErrors(true)
+                .ConfigureServices(services => services.AddAutofac())
                 .UseConfiguration(ConfigurationHelper.Configuration)
                 .UseKestrel()
-                .CaptureStartupErrors(true);
+                .UseStartup<Startup>();
     }
 
-    
+
 }

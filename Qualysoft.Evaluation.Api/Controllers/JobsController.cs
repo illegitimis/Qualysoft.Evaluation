@@ -30,10 +30,8 @@
             backgroundJobRunner = jobber;
         }
 
-        /// <summary>
-        /// Invokes an internal job of selecting the database records and then serializes each table record as an XML file.
-        /// </summary>
-        /// <returns></returns>
+        /// <summary>Invokes an internal job of selecting the database records and then serializes each table record as an XML file.</summary>
+        /// <remarks>Enqueued tasks could be fire and forget.</remarks>
         [HttpGet("saveFiles")]
         [ProducesResponseType(typeof(void), Status200OK)]
         [SwaggerResponse(Status200OK, "OK 200", typeof(void))]
