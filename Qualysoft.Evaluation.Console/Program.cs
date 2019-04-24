@@ -19,7 +19,7 @@ namespace Qualysoft.Evaluation.Console
     /// The address of the API should be configured in the App.config file.
     /// The console application should receive one input parameter from the command line which would be an INT which specifies the number of models
     /// </remarks>
-    class Program
+    static class Program
     {
         const string ApiData = "/api/Data";
         const string mediaTypeJson = "application/json";
@@ -93,13 +93,5 @@ namespace Qualysoft.Evaluation.Console
                 case EndpointType.DevHttps: return $"{DevelopmentHttpsUri()}{ApiData}";
             }
         }            
-    }
-
-    enum EndpointType
-    {
-        ProdHttp,
-        ProdHttps,
-        DevHttp,
-        DevHttps
     }
 }
