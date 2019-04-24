@@ -60,7 +60,7 @@
                 options.RespectBrowserAcceptHeader = true;
                 options.Filters.Add(typeof(GlobalExceptionFilterWithLoggingAttribute));
             })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
             {
@@ -195,9 +195,6 @@
         public void ConfigureDevelopment(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (!env.IsDevelopment()) return;
-
-            LoggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
-            LoggerFactory.AddDebug();
             
             app.UseDeveloperExceptionPage();
 

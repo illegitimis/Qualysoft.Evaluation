@@ -1,15 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Net.Http.Headers;
-using ProtoBuf.Meta;
-
-namespace Formatters.Protobuf
+﻿namespace Formatters.Protobuf
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.Net.Http.Headers;
+    using ProtoBuf.Meta;
+
     public class ProtobufNetInputFormatter : InputFormatter
     {
-        // private readonly ProtobufFormatterOptions _options;
-
         public ProtobufNetInputFormatter(ProtobufFormatterOptions protobufFormatterOptions)
         {
             var _options = protobufFormatterOptions ?? throw new ArgumentNullException(nameof(protobufFormatterOptions));

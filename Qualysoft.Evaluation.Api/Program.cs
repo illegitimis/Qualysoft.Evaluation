@@ -40,7 +40,19 @@
                 .ConfigureServices(services => services.AddAutofac())
                 .UseConfiguration(ConfigurationHelper.Configuration)
                 .UseKestrel()
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureKestrel((context, options) => 
+                {
+                    // Set properties and call methods on options
+                })
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    // LoggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                    // LoggerFactory.AddDebug();
+                    if (hostingContext.HostingEnvironment.IsDevelopment()) logging.AddDebug();
+                });
 
         private static void AutomaticMigrations(IWebHost host)
         {

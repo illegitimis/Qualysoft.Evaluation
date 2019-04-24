@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <StartupObject>Qualysoft.Evaluation.Api.Program</StartupObject>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\GIT\Qualysoft\Qualysoft.Evaluation.Api\Qualysoft.Evaluation.Api.xml</DocumentationFile>
+    <DocumentationFile>Qualysoft.Evaluation.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +17,11 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
     <PackageReference Include="DbUp" Version="4.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.*" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.*" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.App" Version="[2.1.*, 2.2)" />-->
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.*" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
+    <!--<PackageReference Include="protobuf-net" Version="2.4.0" />-->
     <PackageReference Include="Simple.Migrations" Version="0.9.19" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="4.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="3.0.0" />
@@ -27,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Formatters\Formatters.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Application\Qualysoft.Evaluation.Application.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Data\Qualysoft.Evaluation.Data.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Domain\Qualysoft.Evaluation.Domain.csproj" />
