@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Description>ASP.NET Core InputFormatter, OutputFormatter for Protobuf</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="protobuf-net" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.*" />
+  </ItemGroup>
+
+</Project>
