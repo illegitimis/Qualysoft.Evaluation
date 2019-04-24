@@ -5190,7 +5190,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
-          "Qualysoft.Evaluation.Domain": "1.0.0"
+          "Qualysoft.Evaluation.Domain": "1.0.0",
+          "protobuf-net": "2.4.0"
         },
         "compile": {
           "bin/placeholder/Qualysoft.Evaluation.Application.dll": {}

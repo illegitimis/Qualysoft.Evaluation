@@ -1,38 +1,48 @@
+﻿
 namespace Qualysoft.Evaluation.Api.IntegrationTests
 {
-    using Microsoft.AspNetCore.TestHost;
     using Newtonsoft.Json;
     using Qualysoft.Evaluation.Application;
     using System;
-    using System.Collections.Generic;
+using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
     using Xunit;
 
-    public sealed class ServerTestHost : IDisposable
+    public class ApiDataTests : ServerTestHostBase
     {
         const string ApiData = "/api/Data";
-        const string ApiJobsSaveFiles = "/api/Jobs/saveFiles";
         const string mediaTypeJson = "application/json";
 
-        readonly TestServer testServer;
-        readonly HttpClient apiClient;
-
-        public ServerTestHost()
+        public ApiDataTests(ServerTestHostFixture serverTestHostFixture)
+            : base(serverTestHostFixture)
         {
-            var webHostBuilder = Program.CreateWebHostBuilder(new string[0]);
-            testServer = new TestServer(webHostBuilder);
-            apiClient = testServer.CreateClient();
         }
 
         [Fact]
-        public void TestServerCreation()
+        public async Task PostDataMalformedJsonReturnsBadRequest()
         {
-            Assert.NotNull(testServer);
-            Assert.NotNull(apiClient);
+            // arrange, intentionally removed properties from serialized BogusDataGenerator.RequestDtos(3)
+            string json = "[{\"name\":\"Sean Kovacek\",\"visits\":-1777760828,\"date\":\"2018-01-28T10:20:12.7055562+02:00\"},{\"ix\":1,\"date\":\"2018-03-19T23:30:45.7116295+02:00\"},{\"ix\":2,\"name\":\"Savanna Spinka\"}]";
+            var stringContent = new StringContent(json, Encoding.UTF8, mediaTypeJson);
+
+            // act
+            var httpResponseMessage = await apiClient.PostAsync(ApiData, stringContent);
+
+            // assert status
+            Assert.NotNull(httpResponseMessage);
+            Assert.False(httpResponseMessage.IsSuccessStatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
+
+            // Assert response body
+            var body = await httpResponseMessage.Content.ReadAsStringAsync();
+            Assert.Contains("Required property 'ix' not found in JSON.", body);
+            Assert.Contains("Required property 'name' not found in JSON", body);
+            Assert.Contains("Required property 'date' not found in JSON", body);
         }
+
 
         [Fact]
         public async Task PositivePostDataTestWithSingleItemCollection()
@@ -77,28 +87,6 @@ namespace Qualysoft.Evaluation.Api.IntegrationTests
         }
 
         [Fact]
-        public async Task PostDataMalformedJsonReturnsBadRequest()
-        {
-            // arrange, intentionally removed properties from serialized BogusDataGenerator.RequestDtos(3)
-            string json = "[{\"name\":\"Sean Kovacek\",\"visits\":-1777760828,\"date\":\"2018-01-28T10:20:12.7055562+02:00\"},{\"ix\":1,\"date\":\"2018-03-19T23:30:45.7116295+02:00\"},{\"ix\":2,\"name\":\"Savanna Spinka\"}]";
-            var stringContent = new StringContent(json, Encoding.UTF8, mediaTypeJson);
-
-            // act
-            var httpResponseMessage = await apiClient.PostAsync(ApiData, stringContent);
-
-            // assert status
-            Assert.NotNull(httpResponseMessage);
-            Assert.False(httpResponseMessage.IsSuccessStatusCode);
-            Assert.Equal(HttpStatusCode.BadRequest, httpResponseMessage.StatusCode);
-
-            // Assert response body
-            var body = await httpResponseMessage.Content.ReadAsStringAsync();
-            Assert.Contains("Required property 'ix' not found in JSON.", body);
-            Assert.Contains("Required property 'name' not found in JSON", body);
-            Assert.Contains("Required property 'date' not found in JSON", body);
-        }
-
-        [Fact]
         public async Task GivenNoPostDataThenBadRequest()
         {
             // arrange
@@ -115,33 +103,6 @@ namespace Qualysoft.Evaluation.Api.IntegrationTests
             // Assert response body
             var body = await httpResponseMessage.Content.ReadAsStringAsync();
             Assert.Equal("requestDtos", body);
-        }
-
-        [Fact]
-        public async Task PositiveTestJobsSaveFiles()
-        {
-            // act
-            var httpResponseMessage = await apiClient.GetAsync(ApiJobsSaveFiles);
-
-            // assert status
-            Assert.NotNull(httpResponseMessage);
-            Assert.True(httpResponseMessage.IsSuccessStatusCode);
-            Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
-        }
-
-        [Fact]
-        public async Task SwaggerUIShouldGetGeneratedAtRouteBase()
-        {
-            var httpResponseMessage = await apiClient.GetAsync("index.html");
-            Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
-            var body = await httpResponseMessage.Content.ReadAsStringAsync();
-            Assert.Contains("<title>A simple ASP.NET Core Web API</title>", body);
-        }
-
-        public void Dispose()
-        {
-            apiClient.Dispose();
-            testServer.Dispose();
         }
     }
 }

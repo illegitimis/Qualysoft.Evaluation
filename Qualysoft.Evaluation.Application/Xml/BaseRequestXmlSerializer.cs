@@ -3,7 +3,7 @@
     using Qualysoft.Evaluation.Domain;
     using System.Xml.Serialization;
 
-    public abstract class BaseRequestXmlSerializer : ISerializeXml
+    public abstract class BaseRequestXmlSerializer<T> : ISerializeXml<T>
     {
         protected readonly IClassMapper<Request, CT_XSD_Request> mapper;
 
@@ -24,7 +24,7 @@
             }
         }
 
-        public void Persist(Request request) => InternalPersist(request);
+        public T Persist(Request request) => (T)InternalPersist(request);
 
         public abstract object InternalPersist(Request request);
     }

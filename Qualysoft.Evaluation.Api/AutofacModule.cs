@@ -3,6 +3,7 @@
     using Autofac;
     using Microsoft.AspNetCore.Http;
     using Qualysoft.Evaluation.Application;
+    using Qualysoft.Evaluation.Application.Dto;
     using Qualysoft.Evaluation.Application.Xml;
     using Qualysoft.Evaluation.Data;
     using Qualysoft.Evaluation.Domain;
@@ -22,7 +23,7 @@
             builder.RegisterType<DomainToXmlSerializedRequestMapper>().As<IClassMapper<Request, CT_XSD_Request>>().SingleInstance();
             builder.RegisterType<BackgroundJobRunner>().As<IBackgroundJobRunner>().SingleInstance();
 
-            builder.RegisterType<AppDataFileRequestXmlSerializer>().As<ISerializeXml>().InstancePerLifetimeScope();
+            builder.RegisterType<AppDataFileRequestXmlSerializer>().As<ISerializeXml<ProduceXmlDto>>().InstancePerLifetimeScope();
             builder.RegisterType<RequestService>().As<IRequestService>().InstancePerLifetimeScope();
             builder.RegisterType<EFRepository<EvaluationContext, Request, int>>().As<IAsyncRepository<Request, int>>().InstancePerLifetimeScope();
         }

@@ -6,5 +6,6 @@
     public interface IBackgroundJobRunner
     {
         Task Enqueue(Action action);
+        Task<T> Enqueue<T>(Func<T> funcOfT);
     }
 }

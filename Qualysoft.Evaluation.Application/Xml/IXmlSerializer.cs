@@ -2,8 +2,8 @@
 {
     using Qualysoft.Evaluation.Domain;
 
-    public interface ISerializeXml
+    public interface ISerializeXml<T>
     {
-        void Persist(Request request);
+        T Persist(Request request);
     }
 }

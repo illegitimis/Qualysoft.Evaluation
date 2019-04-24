@@ -7,7 +7,7 @@
     using System.Xml;
     using System.Xml.Serialization;
 
-    public class AppDataFileRequestXmlSerializer : BaseRequestXmlSerializer
+    public class AppDataFileRequestXmlSerializer : BaseRequestXmlSerializer<ProduceXmlDto>
     {
         const string DIR = "App_Data/xml";
 
@@ -34,8 +34,13 @@
         /// <remarks>https://stackoverflow.com/questions/4928323/xml-serialization-encoding</remarks>
         public override object InternalPersist(Request request)
         {
+            var s = request.GetDateString();
+            var filePath = $"{DIR}/{s}.xml";
+            var fi = new FileInfo(filePath);
+            if (fi.Exists) return new ProduceXmlDto(fi.Name, fi.Length);
+
             // create or overwrite file
-            using (var fs = File.Create($"{DIR}/{request.GetDateString()}.xml"))
+            using (var fs = File.Create(filePath))
             {
                 using (XmlWriter xmlWriter = XmlWriter.Create(fs, xmlWriterSettings))
                 {
@@ -49,7 +54,7 @@
                     srlz.Serialize(xmlWriter, xsdRequest, Namespaces);
                 }
 
-                return new ProduceXmlDto(fs.Name, fs.Length);
+                return new ProduceXmlDto(/*fs.Name*/s, fs.Length);
             }
         }       
     }

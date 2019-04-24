@@ -1,13 +1,11 @@
 ﻿namespace Qualysoft.Evaluation.Application.Xml
 {
-using System;
-using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
+    using System;
+    using System.Collections.Generic;
     using System.Xml.Serialization;
     using Qualysoft.Evaluation.Domain;
 
-    public class RequestStringXmlSerializer : BaseRequestXmlSerializer
+    public class RequestStringXmlSerializer : BaseRequestXmlSerializer<string>
     {
         public RequestStringXmlSerializer(IClassMapper<Request, CT_XSD_Request> mapper) 
             : base (mapper)
@@ -31,10 +29,5 @@ using System.Collections.Generic;
                 return s;
             }
         }
-    }
-
-    public sealed class Utf8StringWriter : StringWriter
-    {
-        public override Encoding Encoding => Encoding.UTF8;
     }
 }

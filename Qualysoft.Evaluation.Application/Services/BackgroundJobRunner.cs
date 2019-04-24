@@ -25,6 +25,8 @@
         /// </remarks>
         public Task Enqueue(Action action) => Task.Factory.StartNew(() => Failsafe(action), TaskCreationOptions.LongRunning);
 
+        public Task<T> Enqueue<T>(Func<T> funcOfT) => Task.Factory.StartNew<T>(funcOfT, TaskCreationOptions.LongRunning);
+
         private void Failsafe(Action action)
         {
             try

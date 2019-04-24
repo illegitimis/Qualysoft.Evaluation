@@ -4,6 +4,7 @@ namespace Qualysoft.Evaluation.Application.UnitTests
     using Qualysoft.Evaluation.Application.Xml;
     using Qualysoft.Evaluation.Domain;
     using System;
+    using System.IO;
     using Xunit;
 
     public class RequestXmlSerializerTests
@@ -12,8 +13,8 @@ namespace Qualysoft.Evaluation.Application.UnitTests
 
         #region Should split this into separate tests for each serializer type
 
-        private readonly BaseRequestXmlSerializer requestStringXmlSerializer;
-        private readonly BaseRequestXmlSerializer appDataFileRequestXmlSerializer;
+        private readonly BaseRequestXmlSerializer<string> requestStringXmlSerializer;
+        private readonly BaseRequestXmlSerializer<ProduceXmlDto> appDataFileRequestXmlSerializer;
 
         #endregion
 
@@ -56,13 +57,16 @@ namespace Qualysoft.Evaluation.Application.UnitTests
         public void AppDataShouldNotSerializeVisitsWhenNotSpecified()
         {
             var request = Defines.NullVisitsRequest();
-            SerializeRequestAndAssert(appDataFileRequestXmlSerializer, request, o =>
-            {
-                Assert.NotNull(o);
-                ProduceXmlDto dto = Assert.IsType<ProduceXmlDto>(o);
-                Assert.Contains($@"App_Data\xml\{request.GetDateString()}.xml", dto.FileName);
-                Assert.True(dto.StreamLength > 0);
-            });
+            var fullPath = $@"App_Data\xml\{request.GetDateString()}.xml";
+            var dto = appDataFileRequestXmlSerializer.Persist(request);
+            
+            Assert.NotNull(dto);
+            Assert.Contains(dto.FileName, fullPath);
+            Assert.True(dto.StreamLength > 0);
+
+            var content = File.ReadAllText(fullPath);
+            Assert.DoesNotContain("<visits>", content);
+            Assert.DoesNotContain("</visits>", content);
         }
 
         [Fact]
@@ -71,8 +75,8 @@ namespace Qualysoft.Evaluation.Application.UnitTests
             SerializeRequestAndAssert(appDataFileRequestXmlSerializer, Defines.FullRequest(), o => Assert.NotNull(o));
         }
 
-        private void SerializeRequestAndAssert(
-            BaseRequestXmlSerializer srlz,
+        private void SerializeRequestAndAssert<T>(
+            BaseRequestXmlSerializer<T> srlz,
             Request request,
             Action<dynamic> assertAction)
         {

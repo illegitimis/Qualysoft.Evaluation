@@ -2,16 +2,19 @@
 {
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Formatters.Protobuf;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Qualysoft.Evaluation.Api.Filters;
     using Qualysoft.Evaluation.Application;
+    using Qualysoft.Evaluation.Application.Dto;
     using Qualysoft.Evaluation.Application.Xml;
     using Qualysoft.Evaluation.Data;
     using Qualysoft.Evaluation.Domain;
@@ -29,6 +32,8 @@
         const string SWAGGER_ENDPOINT_URL_KEY = "SwaggerEndpointUrl";
         const string DESCRIPTION = "A simple ASP.NET Core Web API";
         const string ERROR_HANDLING_PATH = "/error";
+
+        static readonly ProtobufFormatterOptions protobufFormatterOptions = new ProtobufFormatterOptions { SuppressReadBuffering = false };
 
         /// <summary />
         public Startup(IHostingEnvironment env, IConfiguration config, ILoggerFactory loggerFactory)
@@ -58,7 +63,19 @@
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
+                options.ReturnHttpNotAcceptable = true;
+
+                options.InputFormatters.Add(new XmlSerializerInputFormatter(new MvcOptions { }));
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", "application/xml");
+
+
+                options.InputFormatters.Add(new ProtobufNetInputFormatter(protobufFormatterOptions));
+                options.OutputFormatters.Add(new ProtobufNetOutputFormatter(protobufFormatterOptions));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", "application/x-protobuf");
+
                 options.Filters.Add(typeof(GlobalExceptionFilterWithLoggingAttribute));
+
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -126,7 +143,7 @@
             services.AddScoped<IAsyncRepository<Request, int>, EFRepository<EvaluationContext, Request, int>>();
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IBackgroundJobRunner, BackgroundJobRunner>();
-            services.AddScoped<ISerializeXml, AppDataFileRequestXmlSerializer>();
+            services.AddScoped<ISerializeXml<ProduceXmlDto>, AppDataFileRequestXmlSerializer>();
             services.AddSingleton<IClassMapper<Request, CT_XSD_Request>, DomainToXmlSerializedRequestMapper>();
             
             ConfigureServices(services);
