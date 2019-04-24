@@ -17,9 +17,11 @@
     <Folder Include="Domain\" />
     <Folder Include="Application\" />
     <Folder Include="Data\" />
+    <Folder Include="Api\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Qualysoft.Evaluation.Api\Qualysoft.Evaluation.Api.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Application\Qualysoft.Evaluation.Application.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Data\Qualysoft.Evaluation.Data.csproj" />
     <ProjectReference Include="..\Qualysoft.Evaluation.Domain\Qualysoft.Evaluation.Domain.csproj" />

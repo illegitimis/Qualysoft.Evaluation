@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Data",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Application", "Qualysoft.Evaluation.Application\Qualysoft.Evaluation.Application.csproj", "{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Api.UnitTests", "Qualysoft.Evaluation.Api.UnitTests\Qualysoft.Evaluation.Api.UnitTests.csproj", "{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Api.IntegrationTests", "Qualysoft.Evaluation.Api.IntegrationTests\Qualysoft.Evaluation.Api.IntegrationTests.csproj", "{657A70B9-B4F5-4AE8-AC15-E03703584787}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qualysoft.Evaluation.Console", "Qualysoft.Evaluation.Console\Qualysoft.Evaluation.Console.csproj", "{8F6C5ED1-2D9B-4DFA-B082-215AD0AF3A16}"
@@ -43,10 +41,6 @@ Global
 		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F31A164B-8FC5-43CA-A4AB-CC6752B6981A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBA3A04E-13EA-40DB-AF65-EAC8A09C1FFA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{657A70B9-B4F5-4AE8-AC15-E03703584787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{657A70B9-B4F5-4AE8-AC15-E03703584787}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{657A70B9-B4F5-4AE8-AC15-E03703584787}.Release|Any CPU.ActiveCfg = Release|Any CPU
