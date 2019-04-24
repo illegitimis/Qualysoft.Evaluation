@@ -24,3 +24,5 @@ Qualysoft.Evaluation.Domain.UnitTests/obj/Debug/
 *.csproj.nuget.cache
 *.csproj.nuget.g.props
 *.csproj.nuget.g.targets
+Formatters/obj/Debug/
+Formatters/bin/Debug/netstandard2.0/Formatters.deps.json
